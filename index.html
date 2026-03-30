@@ -8,145 +8,134 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
 
-body {
-    font-family: 'Poppins', sans-serif;
-    height: 100vh;
-    overflow: hidden;
-    color: white;
+body{
+    font-family:'Poppins',sans-serif;
+    height:100vh;
+    overflow:hidden;
+    color:white;
 }
 
-/* 🎥 VIDEO */
-.bg-video {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    filter: brightness(0.5);
+/* 🎥 VIDEOS */
+.bg-video{
+    position:fixed;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+    filter:brightness(0.5);
+    transition:opacity 0.8s ease;
 }
+
+#video2{opacity:0;}
 
 /* CONTAINER */
-.container {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.container{
+    position:relative;
+    width:100%;
+    height:100%;
 }
 
 /* INTRO */
-.intro {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    top: 40%;
+.intro{
+    position:absolute;
+    top:40%;
+    width:100%;
+    text-align:center;
 }
 
-.intro.hide {
-    opacity: 0;
-    transform: scale(0.9);
-}
-
-/* HEART */
-.heart-btn {
-    font-size: 45px;
-    margin-top: 20px;
-    cursor: pointer;
+.heart-btn{
+    font-size:45px;
+    margin-top:20px;
+    cursor:pointer;
 }
 
 /* OVERLAY */
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.5s;
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    pointer-events:none;
+    transition:0.5s;
 }
 
-.overlay.show {
-    opacity: 1;
-    pointer-events: all;
+.overlay.show{
+    opacity:1;
+    pointer-events:all;
 }
 
-.overlay h1 {
-    color: #ff4d88;
-    font-size: 32px;
-}
+.overlay h1{color:#ff4d88;font-size:32px;}
+.overlay h2{margin-top:10px;font-size:20px;}
 
-.overlay h2 {
-    margin-top: 10px;
-    font-size: 20px;
-}
-
-/* MAIN */
-.card {
-    display: none;
-}
+/* MAIN CARD */
+.card{display:none;}
 
 /* TOP TEXT */
-.hero {
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+.hero{
+    position:absolute;
+    top:60px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
 }
 
-.hero h1, .hero h2 {
-    color: #ff4d88;
-}
+.hero h1,.hero h2{color:#ff4d88;}
 
-/* BUTTON CENTER */
-.love-card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    padding: 15px 25px;
-    border-radius: 30px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
-    cursor: pointer;
+/* CENTER BUTTON */
+.love-card{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    padding:15px 25px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    cursor:pointer;
 }
 
 /* MESSAGE */
-.message-card {
-    display: none;
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.6);
-    padding: 20px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 320px;
+.message-card{
+    display:none;
+    position:absolute;
+    bottom:80px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,0.6);
+    padding:20px;
+    border-radius:15px;
+    width:90%;
+    max-width:320px;
 }
 
-.message-card.show {
-    display: block;
-}
+.message-card.show{display:block;}
 </style>
 </head>
 
 <body>
 
-<video autoplay muted loop playsinline class="bg-video">
-    <source src="From Main Klickpin CF- Pinterest Video - 6Y0kWTCBv (1).mp4" type="video/mp4">
+<!-- 🎥 VIDEO 1 -->
+<video autoplay muted loop playsinline class="bg-video" id="video1">
+    <source src="video1.mp4" type="video/mp4">
+</video>
+
+<!-- 🎥 VIDEO 2 -->
+<video autoplay muted loop playsinline class="bg-video" id="video2">
+    <source src="video2.mp4" type="video/mp4">
 </video>
 
 <div class="container">
 
 <!-- INTRO -->
 <div class="intro" id="intro">
-    <h2>Here's a small gift for you</h2>
+    <h2>Here's something for you</h2>
     <div class="heart-btn" onclick="start()">❤️</div>
 </div>
 
@@ -156,7 +145,7 @@ body {
     <h2 id="line2"></h2>
 </div>
 
-<!-- MAIN CARD -->
+<!-- MAIN -->
 <div class="card" id="card">
 
     <div class="hero">
@@ -178,68 +167,72 @@ body {
 
 <script>
 
-// START FLOW
-function start() {
-    document.getElementById("intro").classList.add("hide");
+// START
+function start(){
 
+    // VIDEO SWITCH (smooth)
+    const v1 = document.getElementById("video1");
+    const v2 = document.getElementById("video2");
+
+    v1.style.opacity = "0";
+    v2.style.opacity = "1";
+
+    // HIDE INTRO
+    document.getElementById("intro").style.display = "none";
+
+    // SHOW OVERLAY
     const overlay = document.getElementById("overlay");
     overlay.classList.add("show");
 
-    let text1 = "Dear Harshita ❤️";
-    let text2 = "This is for you 🫶🫵";
+    let t1="Dear Harshita ❤️";
+    let t2="This is for you 🫶🫵";
 
-    let i = 0, j = 0;
+    let i=0,j=0;
 
-    function typeLine1() {
-        if (i < text1.length) {
-            document.getElementById("line1").innerHTML += text1.charAt(i);
-            i++;
-            setTimeout(typeLine1, 80);
-        } else {
-            setTimeout(typeLine2, 300);
-        }
+    function a(){
+        if(i<t1.length){
+            line1.innerHTML+=t1.charAt(i++);
+            setTimeout(a,80);
+        }else setTimeout(b,300);
     }
 
-    function typeLine2() {
-        if (j < text2.length) {
-            document.getElementById("line2").innerHTML += text2.charAt(j);
-            j++;
-            setTimeout(typeLine2, 80);
-        } else {
-            setTimeout(showMain, 800);
-        }
+    function b(){
+        if(j<t2.length){
+            line2.innerHTML+=t2.charAt(j++);
+            setTimeout(b,80);
+        }else setTimeout(showMain,800);
     }
 
-    function showMain() {
+    function showMain(){
         overlay.classList.remove("show");
-        document.getElementById("card").style.display = "block";
+        document.getElementById("card").style.display="block";
         typeTitle();
     }
 
-    typeLine1();
+    a();
 }
 
-// TITLE TYPING
-function typeTitle() {
-    let t1 = "Happy Birthday 🎂🎂";
-    let t2 = "Harshiiii ❤️";
+// TITLE
+function typeTitle(){
+    let t1="Happy Birthday 🎂🎂";
+    let t2="Harshiiii ❤️";
 
-    let i = 0, j = 0;
+    let i=0,j=0;
 
-    document.getElementById("title1").innerHTML = "";
-    document.getElementById("title2").innerHTML = "";
+    title1.innerHTML="";
+    title2.innerHTML="";
 
-    function a() {
-        if (i < t1.length) {
-            title1.innerHTML += t1.charAt(i++);
-            setTimeout(a, 80);
-        } else setTimeout(b, 300);
+    function a(){
+        if(i<t1.length){
+            title1.innerHTML+=t1.charAt(i++);
+            setTimeout(a,80);
+        }else setTimeout(b,300);
     }
 
-    function b() {
-        if (j < t2.length) {
-            title2.innerHTML += t2.charAt(j++);
-            setTimeout(b, 80);
+    function b(){
+        if(j<t2.length){
+            title2.innerHTML+=t2.charAt(j++);
+            setTimeout(b,80);
         }
     }
 
@@ -247,18 +240,18 @@ function typeTitle() {
 }
 
 // OPEN CARD
-let opened = false;
-function openCard() {
-    if (opened) return;
-    opened = true;
+let opened=false;
+function openCard(){
+    if(opened)return;
+    opened=true;
 
     document.getElementById("messageCard").classList.add("show");
     typeMessage();
 }
 
 // MESSAGE
-function typeMessage() {
-    let text = `There’s something really special about you…
+function typeMessage(){
+    let text=`There’s something really special about you…
 the way you smile makes everything feel lighter.
 
 You have a calm, positive vibe that’s rare.
@@ -266,18 +259,18 @@ You have a calm, positive vibe that’s rare.
 Stay exactly the way you are,
 because honestly… it suits you perfectly 🌸`;
 
-    let i = 0;
-    let target = document.getElementById("finalMessage");
-    target.innerHTML = "";
+    let i=0;
+    let target=document.getElementById("finalMessage");
+    target.innerHTML="";
 
-    function typing() {
-        if (i < text.length) {
-            target.innerHTML += text.charAt(i++);
-            setTimeout(typing, 35);
+    function t(){
+        if(i<text.length){
+            target.innerHTML+=text.charAt(i++);
+            setTimeout(t,35);
         }
     }
 
-    typing();
+    t();
 }
 
 </script>
