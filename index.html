@@ -47,15 +47,6 @@ body {
     transform: scale(0.9);
 }
 
-/* GLASS */
-.glass {
-    background: rgba(255,255,255,0.12);
-    padding: 30px;
-    border-radius: 25px;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,0.25);
-}
-
 /* TEXT */
 p {
     font-size: 14px;
@@ -102,17 +93,55 @@ h2 { font-weight: 500; }
     color: #ff4d88;
     letter-spacing: 2px;
 }
-
-/* 💖 CARD */
-.card {
-    display: none;
-    position: relative;
-    width: 100%;
-    max-width: 350px;
-    height: 260px;
-    perspective: 1000px;
+.main {
+    text-align: center;
 }
 
+/* TOP TEXT */
+.hero h1 {
+    font-size: 32px;
+    color: #ff4d88;
+}
+
+.hero h2 {
+    font-size: 28px;
+    color: #ff4d88;
+    margin-top: 10px;
+}
+
+/* LOVE CARD BUTTON */
+.love-card {
+    margin-top: 60px;
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.love-card:hover {
+    transform: scale(1.1);
+}
+
+/* MESSAGE CARD */
+.message-card {
+    margin-top: 30px;
+    display: none;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.6);
+    width: 90%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.message-card.show {
+    display: block;
+}
 /* OPENING ANIMATION */
 .card.show {
     display: block;
@@ -212,11 +241,25 @@ h2 { font-weight: 500; }
     <!-- CARD -->
     <div class="card" id="card">
 
-        <div class="front glass">
-            <h1>Happy Birthday 🎂<br>Harshiiii ❤️</h1>
-            <p>May your smile always stay this beautiful 😊</p>
-            <div class="next-btn" onclick="flipCard()">Read my message →</div>
-        </div>
+    <div class="main">
+
+    <!-- TOP TYPING TEXT -->
+    <div class="hero">
+        <h1 id="title1"></h1>
+        <h2 id="title2"></h2>
+    </div>
+
+    <!-- LOVE CARD BUTTON -->
+    <div class="love-card" onclick="openCard()">
+        💌 Tap to open
+    </div>
+
+    <!-- OPEN CARD -->
+    <div class="message-card" id="messageCard">
+        <p id="finalMessage"></p>
+    </div>
+
+    </div>
 
         <div class="back glass">
             <p>
@@ -267,10 +310,68 @@ function start() {
     }, 500);
 }
 
-function flipCard() {
-    document.getElementById("card").classList.toggle("flip");
+    // 🔥 TITLE TYPING
+function typeTitle() {
+    const t1 = "Happy Birthday 🎂🎂";
+    const t2 = "Harshiiii ❤️";
+
+    let i = 0;
+    let j = 0;
+
+    function type1() {
+        if (i < t1.length) {
+            document.getElementById("title1").innerHTML += t1.charAt(i);
+            i++;
+            setTimeout(type1, 80);
+        } else {
+            setTimeout(type2, 300);
+        }
+    }
+
+    function type2() {
+        if (j < t2.length) {
+            document.getElementById("title2").innerHTML += t2.charAt(j);
+            j++;
+            setTimeout(type2, 80);
+        }
+    }
+
+    type1();
 }
 
+// 💌 OPEN CARD
+function openCard() {
+    const card = document.getElementById("messageCard");
+    card.classList.add("show");
+
+    typeMessage();
+}
+
+// ✨ MESSAGE TYPING
+function typeMessage() {
+    const text = `There’s something really special about you…
+the way you smile makes everything feel lighter.
+
+You have a calm, positive vibe that’s rare.
+
+Stay exactly the way you are,
+because honestly… it suits you perfectly 🌸`;
+
+    let i = 0;
+    const target = document.getElementById("finalMessage");
+    target.innerHTML = "";
+
+    function typing() {
+        if (i < text.length) {
+            target.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 35);
+        }
+    }
+
+    typing();
+        }
+    
 function createHeart() {
     const heart = document.createElement('div');
     heart.className = 'floating-heart';
