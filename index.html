@@ -15,16 +15,11 @@ body {
     height: 100vh;
     overflow: hidden;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* 🎥 VIDEO BACKGROUND */
+/* 🎥 VIDEO */
 .bg-video {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -35,50 +30,40 @@ body {
 /* CONTAINER */
 .container {
     position: relative;
-    text-align: center;
-    width: 90%;
+    width: 100%;
+    height: 100%;
 }
 
 /* INTRO */
 .intro {
-    transition: 0.5s;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 40%;
 }
+
 .intro.hide {
     opacity: 0;
     transform: scale(0.9);
 }
 
-/* TEXT */
-p {
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
-}
-h2 { font-weight: 500; }
-.card h1 { color: #ff4d88; }
-
-/* BUTTONS */
+/* HEART */
 .heart-btn {
-    margin-top: 20px;
     font-size: 45px;
+    margin-top: 20px;
     cursor: pointer;
 }
-.next-btn {
-    margin-top: 15px;
-    cursor: pointer;
-    color: #ff4d88;
-}
-    .overlay {
+
+/* OVERLAY */
+.overlay {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     background: black;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 5;
     opacity: 0;
     pointer-events: none;
     transition: 0.5s;
@@ -89,35 +74,35 @@ h2 { font-weight: 500; }
     pointer-events: all;
 }
 
-#nameText {
-    font-size: 32px;
+.overlay h1 {
     color: #ff4d88;
-    letter-spacing: 2px;
+    font-size: 32px;
 }
-.main {
-    text-align: center;
+
+.overlay h2 {
+    margin-top: 10px;
+    font-size: 20px;
 }
+
+/* MAIN */
+.card {
+    display: none;
+}
+
+/* TOP TEXT */
 .hero {
     position: absolute;
     top: 60px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    width: 100%;
 }
-/* TOP TEXT */
-.hero h1 {
-    font-size: 32px;
+
+.hero h1, .hero h2 {
     color: #ff4d88;
 }
 
-.hero h2 {
-    font-size: 28px;
-    color: #ff4d88;
-    margin-top: 10px;
-}
-
-/* LOVE CARD BUTTON */
+/* BUTTON CENTER */
 .love-card {
     position: absolute;
     top: 50%;
@@ -129,241 +114,151 @@ h2 { font-weight: 500; }
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(10px);
     cursor: pointer;
-    font-size: 18px;
-    transition: 0.3s;
 }
 
-.love-card:hover {
-    transform: scale(1.1);
-}
-
-/* MESSAGE CARD */
+/* MESSAGE */
 .message-card {
-    margin-top: 30px;
     display: none;
-    padding: 25px;
-    border-radius: 20px;
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
     background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 15px;
     width: 90%;
     max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .message-card.show {
     display: block;
 }
-/* OPENING ANIMATION */
-.card.show {
-    display: block;
-    animation: popIn 0.8s ease forwards;
-}
-
-@keyframes popIn {
-    0% {
-        transform: scale(0.7);
-        opacity: 0;
-    }
-    60% {
-        transform: scale(1.05);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* FRONT + BACK */
-.front, .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.8s ease;
-}
-
-/* GLASS inside */
-.front.glass, .back.glass {
-    padding: 25px;
-}
-
-/* FLIP */
-.front {
-    transform: rotateY(0deg);
-}
-.back {
-    transform: rotateY(180deg);
-}
-
-.card.flip .front {
-    transform: rotateY(180deg);
-}
-.card.flip .back {
-    transform: rotateY(0deg);
-}
-.card {
-    display: none;
-}
-/* HEARTS */
-.floating-heart {
-    position: absolute;
-    bottom: -50px;
-    font-size: 18px;
-    animation: fly 5s linear forwards;
-}
-
-@keyframes fly {
-    to {
-        transform: translateY(-110vh);
-        opacity: 0;
-    }
-}
-    .front {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-    }
 </style>
 </head>
 
 <body>
 
-<!-- 🎥 VIDEO -->
 <video autoplay muted loop playsinline class="bg-video">
-    <source src="From Main Klickpin CF- Pinterest Video - 6Y0kWTCBv (1).mp4" type="video/mp4">
+    <source src="your-video.mp4" type="video/mp4">
 </video>
 
 <div class="container">
-<div class="overlay" id="overlay">
-    <h1 id="nameText"></h1>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+    <h2>Here's a small gift for you</h2>
+    <div class="heart-btn" onclick="start()">❤️</div>
 </div>
-    <!-- INTRO -->
-    <div class="intro" id="intro">
-        <div class="glass">
-            <h2>Here's a small gift for you <br><b>Madam jii</b></h2>
-            <p>I didn’t want to wish you in a boring way,<br>so I made this ✨</p>
-            <div class="heart-btn" onclick="start()">❤️</div>
-        </div>
-    </div>
 
-    <!-- CARD -->
-    <div class="card" id="card">
+<!-- OVERLAY -->
+<div class="overlay" id="overlay">
+    <h1 id="line1"></h1>
+    <h2 id="line2"></h2>
+</div>
 
-    <div class="main">
+<!-- MAIN CARD -->
+<div class="card" id="card">
 
-    <!-- TOP TYPING TEXT -->
     <div class="hero">
         <h1 id="title1"></h1>
         <h2 id="title2"></h2>
     </div>
 
-    <!-- LOVE CARD BUTTON -->
     <div class="love-card" onclick="openCard()">
         💌 Tap to open
     </div>
 
-    <!-- OPEN CARD -->
     <div class="message-card" id="messageCard">
         <p id="finalMessage"></p>
     </div>
 
-    </div>
-
-        <div class="back glass">
-            <p>
-                There’s something really special about you…  
-                the way you smile makes everything feel lighter.  
-
-                You have a calm, positive vibe that’s rare.  
-
-                Stay exactly the way you are,  
-                because honestly… it suits you perfectly 🌸
-            </p>
-        </div>
-
-    </div>
+</div>
 
 </div>
 
 <script>
+
+// START FLOW
 function start() {
     document.getElementById("intro").classList.add("hide");
 
     const overlay = document.getElementById("overlay");
-    const nameText = document.getElementById("nameText");
+    overlay.classList.add("show");
 
-    setTimeout(() => {
-        overlay.classList.add("show");
+    let text1 = "Dear Harshita ❤️";
+    let text2 = "This is for you 🫶🫵";
 
-        let text = "Harshita❤️, This is for you 🫶🫵";
+    let i = 0, j = 0;
 
-        let i = 0;
-
-        function type() {
-            if (i < text.length) {
-                nameText.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, 100);
-            } else {
-                // after typing → show card
-                setTimeout(() => {
-                    overlay.classList.remove("show");
-                    document.getElementById("card").classList.add("show");
-                    typeTitle();
-                    playMusic();
-                }, 800);
-            }
-        }
-
-        type();
-    }, 500);
-}
-
-    // 🔥 TITLE TYPING
-function typeTitle() {
-    const t1 = "Happy Birthday 🎂🎂";
-    const t2 = "Harshiiii ❤️";
-
-    let i = 0;
-    let j = 0;
-
-    function type1() {
-        if (i < t1.length) {
-            document.getElementById("title1").innerHTML += t1.charAt(i);
+    function typeLine1() {
+        if (i < text1.length) {
+            document.getElementById("line1").innerHTML += text1.charAt(i);
             i++;
-            setTimeout(type1, 80);
+            setTimeout(typeLine1, 80);
         } else {
-            setTimeout(type2, 300);
+            setTimeout(typeLine2, 300);
         }
     }
 
-    function type2() {
-        if (j < t2.length) {
-            document.getElementById("title2").innerHTML += t2.charAt(j);
+    function typeLine2() {
+        if (j < text2.length) {
+            document.getElementById("line2").innerHTML += text2.charAt(j);
             j++;
-            setTimeout(type2, 80);
+            setTimeout(typeLine2, 80);
+        } else {
+            setTimeout(showMain, 800);
         }
     }
 
-    type1();
+    function showMain() {
+        overlay.classList.remove("show");
+        document.getElementById("card").style.display = "block";
+        typeTitle();
+    }
+
+    typeLine1();
 }
 
-// 💌 OPEN CARD
-function openCard() {
-    const card = document.getElementById("messageCard");
-    card.classList.add("show");
+// TITLE TYPING
+function typeTitle() {
+    let t1 = "Happy Birthday 🎂🎂";
+    let t2 = "Harshiiii ❤️";
 
+    let i = 0, j = 0;
+
+    document.getElementById("title1").innerHTML = "";
+    document.getElementById("title2").innerHTML = "";
+
+    function a() {
+        if (i < t1.length) {
+            title1.innerHTML += t1.charAt(i++);
+            setTimeout(a, 80);
+        } else setTimeout(b, 300);
+    }
+
+    function b() {
+        if (j < t2.length) {
+            title2.innerHTML += t2.charAt(j++);
+            setTimeout(b, 80);
+        }
+    }
+
+    a();
+}
+
+// OPEN CARD
+let opened = false;
+function openCard() {
+    if (opened) return;
+    opened = true;
+
+    document.getElementById("messageCard").classList.add("show");
     typeMessage();
 }
 
-// ✨ MESSAGE TYPING
+// MESSAGE
 function typeMessage() {
-    const text = `There’s something really special about you…
+    let text = `There’s something really special about you…
 the way you smile makes everything feel lighter.
 
 You have a calm, positive vibe that’s rare.
@@ -372,28 +267,19 @@ Stay exactly the way you are,
 because honestly… it suits you perfectly 🌸`;
 
     let i = 0;
-    const target = document.getElementById("finalMessage");
+    let target = document.getElementById("finalMessage");
     target.innerHTML = "";
 
     function typing() {
         if (i < text.length) {
-            target.innerHTML += text.charAt(i);
-            i++;
+            target.innerHTML += text.charAt(i++);
             setTimeout(typing, 35);
         }
     }
 
     typing();
-        }
-    
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'floating-heart';
-    heart.innerHTML = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
 }
+
 </script>
 
 </body>
