@@ -194,7 +194,9 @@ h2 { font-weight: 500; }
 .card.flip .back {
     transform: rotateY(0deg);
 }
-
+.card {
+    display: none;
+}
 /* HEARTS */
 .floating-heart {
     position: absolute;
@@ -301,6 +303,7 @@ function start() {
                 setTimeout(() => {
                     overlay.classList.remove("show");
                     document.getElementById("card").classList.add("show");
+                    typeTitle();
                     playMusic();
                 }, 800);
             }
