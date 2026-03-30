@@ -9,7 +9,7 @@
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
 body {
     font-family: 'Poppins', sans-serif;
     height: 100vh;
@@ -18,9 +18,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    }
+}
 
-    .bg-video {
+/* 🎥 VIDEO BACKGROUND */
+.bg-video {
     position: fixed;
     top: 0;
     left: 0;
@@ -29,32 +30,8 @@ body {
     object-fit: cover;
     z-index: -1;
     filter: brightness(0.5);
-    }
-
-    p {
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
-    }
-    
-.card {
-    display: none;
-    margin-top: 20px;
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-    transition: all 0.8s ease;
-    perspective: 1000px;
-    position: relative;
-    width: 100%;
-    max-width: 350px;
-    height: 260px;
 }
 
-.card.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
 /* CONTAINER */
 .container {
     text-align: center;
@@ -65,13 +42,12 @@ body {
 .intro {
     transition: 0.5s;
 }
-
 .intro.hide {
     opacity: 0;
     transform: scale(0.9);
 }
 
-/* GLASS EFFECT */
+/* GLASS */
 .glass {
     background: rgba(255,255,255,0.12);
     padding: 30px;
@@ -81,35 +57,78 @@ body {
 }
 
 /* TEXT */
-h2 { font-weight: 500; }
-
-.card h1 {
-    color: #ff4d88;
+p {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
 }
+h2 { font-weight: 500; }
+.card h1 { color: #ff4d88; }
 
-/* BUTTON */
+/* BUTTONS */
 .heart-btn {
     margin-top: 20px;
     font-size: 45px;
     cursor: pointer;
 }
-
 .next-btn {
     margin-top: 15px;
     cursor: pointer;
     color: #ff4d88;
 }
 
+/* 💖 CARD */
+.card {
+    display: none;
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: 260px;
+    perspective: 1000px;
+}
+
+/* OPENING ANIMATION */
+.card.show {
+    display: block;
+    animation: popIn 0.8s ease forwards;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* FRONT + BACK */
 .front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     transition: transform 0.8s ease;
 }
 
-.front {
-    transform: rotateY(0deg);
-    overflow: auto;
+/* GLASS inside */
+.front.glass, .back.glass {
+    padding: 25px;
 }
 
+/* FLIP */
+.front {
+    transform: rotateY(0deg);
+}
 .back {
     transform: rotateY(180deg);
 }
@@ -117,19 +136,10 @@ h2 { font-weight: 500; }
 .card.flip .front {
     transform: rotateY(180deg);
 }
-
 .card.flip .back {
     transform: rotateY(0deg);
 }
-    
-.front, .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+
 /* HEARTS */
 .floating-heart {
     position: absolute;
@@ -148,10 +158,11 @@ h2 { font-weight: 500; }
 </head>
 
 <body>
-    
-    <video autoplay muted loop playsinline class="bg-video">
-    <source src="From Main Klickpin CF- Pinterest Video - 6Y0kWTCBv (1).mp4" type="video/mp4">
-    </video>
+
+<!-- 🎥 VIDEO -->
+<video autoplay muted loop playsinline class="bg-video">
+    <source src="YOUR_VIDEO_LINK.mp4" type="video/mp4">
+</video>
 
 <div class="container">
 
@@ -167,23 +178,13 @@ h2 { font-weight: 500; }
     <!-- CARD -->
     <div class="card" id="card">
 
-    <div class="front glass">
-        ...
-    </div>
-
-    <div class="back glass">
-        ...
-    </div>
-
-    </div>
-        
-        <div class="front">
+        <div class="front glass">
             <h1>Happy Birthday 🎂<br>Harshiiii ❤️</h1>
             <p>May your smile always stay this beautiful 😊</p>
             <div class="next-btn" onclick="flipCard()">Read my message →</div>
         </div>
 
-        <div class="back">
+        <div class="back glass">
             <p>
                 There’s something really special about you…  
                 the way you smile makes everything feel lighter.  
@@ -207,14 +208,16 @@ function start() {
         document.getElementById("card").classList.add("show");
     }, 400);
 
- for (let i = 0; i < 15; i++) {
-    setTimeout(createHeart, i * 200);
- }
+    // ❤️ one-time hearts burst
+    for (let i = 0; i < 15; i++) {
+        setTimeout(createHeart, i * 200);
+    }
+}
 
 function flipCard() {
     document.getElementById("card").classList.toggle("flip");
 }
-}
+
 function createHeart() {
     const heart = document.createElement('div');
     heart.className = 'floating-heart';
