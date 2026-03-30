@@ -34,6 +34,7 @@ body {
 
 /* CONTAINER */
 .container {
+    position: relative;
     text-align: center;
     width: 90%;
 }
@@ -96,7 +97,14 @@ h2 { font-weight: 500; }
 .main {
     text-align: center;
 }
-
+.hero {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
 /* TOP TEXT */
 .hero h1 {
     font-size: 32px;
@@ -111,8 +119,11 @@ h2 { font-weight: 500; }
 
 /* LOVE CARD BUTTON */
 .love-card {
-    margin-top: 60px;
-    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
     padding: 15px 25px;
     border-radius: 30px;
     background: rgba(255,255,255,0.15);
