@@ -1,1 +1,169 @@
-# Wishing-you-birthday
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Harshita 🎂</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') no-repeat center/cover;
+}
+
+/* CONTAINER */
+.container {
+    text-align: center;
+    width: 90%;
+}
+
+/* INTRO */
+.intro {
+    transition: 0.5s;
+}
+
+.intro.hide {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+/* CARD */
+.card {
+    display: none;
+    margin-top: 20px;
+}
+
+.card.show {
+    display: block;
+}
+
+/* GLASS EFFECT */
+.glass {
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* TEXT */
+h2 { font-weight: 500; }
+p { font-size: 14px; margin-top: 10px; }
+
+.card h1 {
+    color: #ff4d88;
+}
+
+/* BUTTON */
+.heart-btn {
+    margin-top: 20px;
+    font-size: 45px;
+    cursor: pointer;
+}
+
+.next-btn {
+    margin-top: 15px;
+    cursor: pointer;
+    color: #ff4d88;
+}
+
+/* FLIP */
+.back { display: none; }
+
+.card.flip .front { display: none; }
+.card.flip .back { display: block; }
+
+/* HEARTS */
+.floating-heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 18px;
+    animation: fly 5s linear forwards;
+}
+
+@keyframes fly {
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- INTRO -->
+    <div class="intro" id="intro">
+        <div class="glass">
+            <h2>Here's a small gift for you <br><b>Madam jii</b></h2>
+            <p>I didn’t want to wish you in a boring way,<br>so I made this ✨</p>
+            <div class="heart-btn" onclick="start()">❤️</div>
+        </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card glass" id="card">
+        
+        <div class="front">
+            <h1>Happy Birthday 🎂<br>Harshiiii ❤️</h1>
+            <p>May your smile always stay this beautiful 😊</p>
+            <div class="next-btn" onclick="flipCard()">Read my message →</div>
+        </div>
+
+        <div class="back">
+            <p>
+                There’s something really special about you…  
+                the way you smile makes everything feel lighter.  
+
+                You have a calm, positive vibe that’s rare.  
+
+                Stay exactly the way you are,  
+                because honestly… it suits you perfectly 🌸
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function start() {
+    document.getElementById("intro").classList.add("hide");
+
+    setTimeout(() => {
+        document.getElementById("card").classList.add("show");
+    }, 400);
+
+    setInterval(createHeart, 700);
+}
+
+function flipCard() {
+    document.getElementById("card").classList.toggle("flip");
+}
+
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+</script>
+
+</body>
+</html>
