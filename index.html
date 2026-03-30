@@ -47,7 +47,7 @@ body {
     position: relative;
     width: 100%;
     max-width: 350px;
-    height: 220px;
+    height: 260px;
 }
 
 .card.show {
@@ -107,14 +107,11 @@ h2 { font-weight: 500; }
 
 .front {
     transform: rotateY(0deg);
+    overflow: auto;
 }
 
 .back {
     transform: rotateY(180deg);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
 }
 
 .card.flip .front {
@@ -122,8 +119,9 @@ h2 { font-weight: 500; }
 }
 
 .card.flip .back {
-    transform: rotateY(360deg);
+    transform: rotateY(0deg);
 }
+    
 .front, .back {
     position: absolute;
     width: 100%;
@@ -167,7 +165,17 @@ h2 { font-weight: 500; }
     </div>
 
     <!-- CARD -->
-    <div class="card glass" id="card">
+    <div class="card" id="card">
+
+    <div class="front glass">
+        ...
+    </div>
+
+    <div class="back glass">
+        ...
+    </div>
+
+    </div>
         
         <div class="front">
             <h1>Happy Birthday 🎂<br>Harshiiii ❤️</h1>
